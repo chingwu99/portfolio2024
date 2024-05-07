@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/Navbar/Navbar";
+// import StyledComponents setting
 import StyledComponentsRegistry from "../lib/registry";
+import GlobalThemeWrapper from "../lib/GlobalThemeWrapper";
+// import components
+import BodyWrapper from "../components/BodyWrapper";
+import Navbar from "./components/Navbar/Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["greek"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,13 +21,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <StyledComponentsRegistry>
-          <Navbar />
-          {children}
-        </StyledComponentsRegistry>
-      </body>
+    <html lang="en" className={inter.className}>
+      <StyledComponentsRegistry>
+        <GlobalThemeWrapper>
+          <BodyWrapper>
+            <Navbar />
+            {children}
+          </BodyWrapper>
+        </GlobalThemeWrapper>
+      </StyledComponentsRegistry>
     </html>
   );
 }
